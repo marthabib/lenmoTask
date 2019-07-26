@@ -66,6 +66,10 @@ loan3bestOfferId = loan3.offers[0].id
 loan3.acceptLoanOffer(id=loan3bestOfferId)
 
 
+print('\n investor1 will try to submit new offers but borrowers alread accepted another offers.')
+loan1.submitLoanOffer(investor=investor1, interest=8)
+loan2.submitLoanOffer(investor=investor1, interest=5)
+
 print('creat transactions and fund loans')
 transaction1 = PaymentFacade(loan1)
 transaction2 = PaymentFacade(loan2)
