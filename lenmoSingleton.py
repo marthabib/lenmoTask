@@ -23,4 +23,5 @@ class Lenmo():
 
     @classmethod
     def gain(cls):
+        print('Lenmo Fee transfer.. in progress..')
         cls.__balance += cls.__profitAmount

@@ -63,7 +63,7 @@ class Loan():
                 'submitted_at': self.time
             })
         else:
-            return print('not initiated! \n')
+            return print('No available Loan requests \n')
 
     def __isValidOffer(self, investor, interest):
 
@@ -73,7 +73,7 @@ class Loan():
                 'Sorry Loan is already applied by another Investor! \n')
 
         elif investor.balance < self.amount:
-            validationErr = ('Sorry you dont have enough credite! \n')
+            validationErr = ('Sorry you dont have enough credit! \n')
 
         else:
             isValid = True
@@ -100,13 +100,19 @@ class Loan():
 
         return print('Sorry no one submit offers yet! \n' if len(self.offers) == 0 else [(offer.id, offer.interest) for offer in self.offers])
 
+    def __getOfferById(self, id):
+        acceptedOffer = None
+        for offer in self.offers:
+            if offer.id == id:
+                acceptedOffer = offer
+        return acceptedOffer
+
     def acceptLoanOffer(self, id):
 
         print('acceptLoanOffer ... in progress ...')
         if self.loanAlreadyTaken:
             return print('Loan Offer already accepted and money already transfered! \n')
-        acceptedOffer = [offer if offer.id ==
-                         id else None for offer in self.offers][0]
+        acceptedOffer = self.__getOfferById(id)
         if acceptedOffer:
             self.loanAlreadyTaken = True
             self.acceptedOffer = acceptedOffer
@@ -118,4 +124,10 @@ class Loan():
 
         else:
             return print('Invalid offerID! \n')
-        
+
+    def showAcceptedOffer(self):
+        if self.acceptedOffer:
+            return print('accepted offer Id= {} accepted offer investor identity {} accepted offer interest {}'
+                         .format(self.acceptedOffer.id, self.acceptedOffer.investor.identity, self.acceptedOffer.interest))
+        else:
+            print('no offer has been accepted yet!')
